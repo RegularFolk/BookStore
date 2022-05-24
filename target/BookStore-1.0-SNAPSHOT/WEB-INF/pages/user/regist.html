@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>会员注册页面</title>
+    <base th:href="@{/}"/>
+    <link type="text/css" rel="stylesheet" href="static/css/style.css"/>
+    <link rel="stylesheet" href="static/css/register.css"/>
+    <style type="text/css">
+        .login_form {
+            height: 420px;
+            margin-top: 25px;
+        }
+    </style>
+    <!--在注册页面引入vue-->
+    <script src="static/script/vue.js"></script>
+    <script src="static/script/axios.js"></script>
+</head>
+<body>
+<div id="app">
+    <div id="login_header">
+        <a href="index.html">
+            <img class="logo_img" alt="" src="static/img/huaji1.png" width="258" height="82"/>
+        </a>
+    </div>
+
+    <div class="login_banner">
+        <div class="register_form">
+            <h1>注册会员</h1>
+            <div style="color: red" th:text="${errorMessage}"></div>
+            <form action="user?method=doRegister" method="post">
+                <div class="form-item">
+                    <div>
+                        <label>用户名称:</label>
+                        <input type="text" placeholder="请输入用户名" name="username" v-model="username"
+                               @blur="checkUsername"/>
+                    </div>
+                    <span style="color: red">{{usernameErrorMessage}}</span>
+                </div>
+                <div class="form-item">
+                    <div>
+                        <label>用户密码:</label>
+                        <input type="password" placeholder="请输入密码" name="userPwd" v-model="password"/>
+                    </div>
+                    <span style="color: red">{{passwordErrorMessage}}</span>
+                </div>
+                <div class="form-item">
+                    <div>
+                        <label>确认密码:</label>
+                        <input type="password" placeholder="请输入确认密码" v-model="passwordConfirm"/>
+                    </div>
+                    <span style="color: red">{{confirmErrorMessage}}</span>
+                </div>
+                <div class="form-item">
+                    <div>
+                        <label>用户邮箱:</label>
+                        <input type="text" placeholder="请输入邮箱" name="email" v-model="email" @blur="checkEmail"/>
+                    </div>
+                    <span style="color: red">{{emailErrorMessage}}</span>
+                </div>
+                <div class="form-item">
+                    <div>
+                        <label>验证码:</label>
+                        <div class="verify">
+                            <input type="text" placeholder="点击图片刷新验证码" name="code" v-model="code" @blur="checkCode"/>
+                            <img :src="checkCodePath" width="126px" height="35px" alt="" @click="changeCode"/>
+                        </div>
+                    </div>
+                    <span style="color:red;">{{codeErrorMessage}}</span>
+                </div>
+                <button class="btn" @click="registerCheck">注册</button>
+            </form>
+        </div>
+    </div>
+    <div id="bottom">
+    <span>
+      书城.Copyright &copy;2022
+    </span>
+    </div>
+</div>
+<script>
+    var vue = new Vue({
+        "el": "#app",
+        "data": {
+            "username": "",//用户名
+            "password": "",//密码
+            "passwordConfirm": "",//确认密码
+            "email": "",//邮箱
+            "code": "",//验证码
+            "usernameErrorMessage": "",
+            "passwordErrorMessage": "",
+            "confirmErrorMessage": "",
+            "emailErrorMessage": "",
+            "codeErrorMessage": "",
+            "checkCodePath": "kaptcha"
+        },
+        "methods": {
+            checkUsername() {
+                //校验用户名是否符合规则,先检查是否符合规则,再检查是否已存在
+                //1. 编写一个正则表达式去描述这个规则
+                var usernameRegExp = /^[A-Za-z0-9_]{5,8}$/;
+                //2. 使用正则表达式校验用户名输入框里面的内容:this.username
+                if (!usernameRegExp.test(this.username)) {
+                    //校验不通过
+                    this.usernameErrorMessage = "用户名必须是5-8位的数字、字母或者下划线";
+                } else {
+                    //如果通过就校验用户名是否已存在:发送异步请求
+                    axios({
+                        "method": "post",
+                        "url": "user",
+                        "params": {
+                            "method": "checkUsername",
+                            "username": this.username,
+                        }
+                    }).then(response => {
+                        this.usernameErrorMessage = !response.data.flag ? response.data.message : "";
+                    })
+                }
+            },
+            checkEmail() {
+                //校验邮箱格式和是否已被注册
+                var emailRegExp = /^[a-zA-Z0-9_\.-]+@([a-zA-Z0-9-]+[\.]{1})+[a-zA-Z]+$/;
+                if (!emailRegExp.test(this.email)) {
+                    this.emailErrorMessage = "邮箱格式不正确";
+                } else {
+                    //验证邮箱是否已存在
+                    axios({
+                        "method": "post",
+                        "url": "user",
+                        "params": {
+                            "method": "checkEmail",
+                            "email": this.email
+                        }
+                    }).then(response => {
+                        this.emailErrorMessage = !response.data.flag ? response.data.message : "";
+                    })
+                }
+            },
+            checkCode() {
+                //校验验证码是否正确
+                axios({
+                    "method": "post",
+                    "url": "user",
+                    "params": {
+                        "method": "checkCode",
+                        "code": this.code
+                    }
+                }).then(response => {
+                    this.codeErrorMessage = !response.data.flag ? response.data.message : "";
+                })
+            },
+            registerCheck() {
+                //注册校验的方法
+                //1. 校验用户名
+                //1.1 编写一个正则表达式去描述这个规则
+                var usernameRegExp = /^[A-Za-z0-9_]{5,8}$/;
+                //1.2 校验用户名是否符合规则
+                if (!usernameRegExp.test(this.username)) {
+                    //用户名不符合规则，那么就阻止默认事件
+                    event.preventDefault();
+
+                    this.usernameErrorMessage = "用户名必须是5-8位的数字、字母或者下划线";
+                    return;
+                }
+                //2. 校验密码
+                //2.1 编写一个正则表达式去描述密码校验的规则
+                var passwordRegExp = /^[A-Za-z0-9_]{6,10}$/;
+                //2.2 使用正则表达式校验密码
+                if (!passwordRegExp.test(this.password)) {
+                    //密码不符合规则，那么就阻止默认事件
+                    event.preventDefault();
+
+                    this.passwordErrorMessage = "密码必须是6-10位的数字、字母或者下划线";
+                    return;
+                } else {
+                    this.passwordErrorMessage = "";
+                }
+                //3. 校验确认密码
+                //3.1 就是对比确认密码输入框的内容和密码输入框的内容是否一样
+                if (this.password != this.passwordConfirm) {
+                    event.preventDefault();
+                    this.confirmErrorMessage = "两次输入的密码必须一致";
+                    return;
+                } else {
+                    this.confirmErrorMessage = "";
+                }
+                //4. 校验邮箱格式
+                var emailRegExp = /^[a-zA-Z0-9_\.-]+@([a-zA-Z0-9-]+[\.]{1})+[a-zA-Z]+$/;
+                if (!emailRegExp.test(this.email)) {
+                    event.preventDefault();
+
+                    this.emailErrorMessage = "邮箱格式不正确";
+                } else {
+                    //验证邮箱是否已存在
+                    axios({
+                        "method": "post",
+                        "url": "user",
+                        "params": {
+                            "method": "checkEmail",
+                            "email": this.email
+                        }
+                    }).then(response => {
+                        if (!response.data.flag) {
+                            event.preventDefault();
+                            this.emailErrorMessage = response.data.message;
+                        }
+                    })
+                }
+            },
+            changeCode() {
+                // alert("hello");
+                //切换验证码,其实就是重新设置img标签的src,带一个date是为了确保每次访问路径不一样
+                this.checkCodePath = "kaptcha?time=" + new Date();
+            }
+        }
+        /*"watch":{
+          //对用户名添加监听
+          "username":function (inputValue) {
+            //校验用户名是否符合规则
+            //1. 编写一个正则表达式去描述这个规则
+            var usernameRegExp = /^[A-Za-z0-9_]{5,8}$/;
+            //2. 使用正则表达式校验用户名输入框里面的内容:inputValue
+            if (!usernameRegExp.test(inputValue)) {
+              //校验不通过
+              this.usernameErrorMessage = "用户名必须是5-8位的数字、字母或者下划线"
+            }else {
+              //符合规则了,就重新设置提示信息为空
+              this.usernameErrorMessage = ""
+            }
+          }
+        }*/
+    });
+</script>
+</body>
+</html>

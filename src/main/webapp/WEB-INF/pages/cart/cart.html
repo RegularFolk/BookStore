@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Document</title>
+    <base th:href="@{/}" href="/bookstore/"/>
+    <link rel="stylesheet" href="static/css/minireset.css"/>
+    <link rel="stylesheet" href="static/css/common.css"/>
+    <link rel="stylesheet" href="static/css/cart.css"/>
+    <script type="text/javascript" src="static/script/jquery.js"></script>
+    <script src="static/script/axios.js"></script>
+    <script src="static/script/vue.js"></script>
+    <script type="text/javascript" src="static/layer/layer.js"></script>
+</head>
+<body>
+
+<div class="header">
+    <div class="w">
+        <div class="header-left">
+            <a href="index.html">
+                <img src="static/img/huaji1.png" alt=""/></a>
+            <h1>我的购物车</h1>
+        </div>
+        <div class="header-right" th:if="${session.loginUser != null}">
+            <h3>欢迎<span th:text="${session.loginUser.username}"></span>光临书城</h3>
+            <div class="order"><a href="pages/order/order.html">我的订单</a></div>
+            <div class="destory"><a href="index.html">注销</a></div>
+            <div class="gohome">
+                <a href="index.html">返回</a>
+            </div>
+        </div>
+        <div class="header-right" th:unless="${session.loginUser != null}">
+            <h3>请您登录！</h3>
+            <div class="order"><a href="pages/order/order.html">我的订单</a></div>
+            <div class="destory"><a href="index.html">注销</a></div>
+            <div class="gohome">
+                <a href="index.html">返回</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="app">
+    <div class="list">
+        <div class="w">
+            <table>
+                <thead>
+                <tr>
+                    <th>图片</th>
+                    <th>商品名称</th>
+                    <th>数量</th>
+                    <th>单价</th>
+                    <th>金额</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody v-if="cart.totalCount == 0">
+                <tr><!--购物车为空-->
+                    <td th:colspan="6">
+                        <a href="index.html">购物车空空如也，请开始选购吧！！</a>
+                    </td>
+                </tr>
+                </tbody>
+                <tbody v-if="cart.totalCount > 0">
+                <tr v-for="(cartItem,index) in cart.cartItemList"><!--购物车不为空-->
+                    <td>
+                        <img :src="cartItem.imgPath" alt=""/>
+                    </td>
+                    <td v-text="cartItem.bookName">获取书名失败</td>
+                    <td>
+                        <a class="count"
+                           @click="cartItemCountDecrease(cartItem.count,cartItem.bookName,cartItem.bookId,index)">-</a>
+                        <input class="count-num" type="text" v-model="cartItem.count"
+                               @change="updateCartItemCount(index,cartItem.count)"/>
+                        <a class="count"
+                           @click="cartItemCountIncrease(cartItem.count,cartItem.bookName,cartItem.bookId,index)">+</a>
+                    </td>
+                    <td v-text="cartItem.price">获取失败</td>
+                    <td v-text="cartItem.amount">获取失败</td>
+                    <td><a href="javascript:;" @click="deleteCartItem(cartItem.bookId,index)">删除</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <div class="footer" v-if="cart.totalCount > 0">
+                <div class="footer-left">
+                    <a href="protected/cart?method=cleanCart" class="clear-cart" @click="cleanCart">清空购物车</a>
+                    <a href="#">继续购物</a>
+                </div>
+                <div class="footer-right">
+                    <div>共<span v-text="cart.totalCount">获取总数失败</span>件商品</div>
+                    <div class="total-price">总金额<span v-text="cart.totalAmount">99.9</span>元</div>
+                    <a class="pay" href="protected/orderClient?method=checkOut" @click="checkOutConfirm">去结账</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    let vue = new Vue({
+        "el": "#app",
+        "data": {
+            "cart": {
+                "totalCount": 0,
+                "totalAmount": 0,
+                "cartItemList": []
+            }
+        },
+        "methods": {
+            cleanCart() {
+                //弹出确认框
+                if (!confirm("确定清空购物车吗？")) {
+                    //不清空,阻止请求
+                    event.preventDefault();
+                }
+            },
+            deleteCartItem(bookId, index) {
+                if (confirm("确定要删除《" + this.cart.cartItemList[index].bookName + "》吗？")) {
+                    //发送删除的异步请求
+                    axios({
+                        "method": "post",
+                        "url": "protected/cart",
+                        "params": {
+                            "method": "removeItem",
+                            "id": bookId
+                        }
+                    }).then(response => {
+                        if (response.data.flag) {
+                            //表示要将当前条目删除,价格cartItemList下标对应项删除
+                            this.cart.cartItemList.splice(index, 1);
+                            //重新设置页面的totalCount和totalAmount
+                            this.cart.totalCount = response.data.resultData.totalCount;
+                            this.cart.totalAmount = response.data.resultData.totalAmount;
+                        }
+                    })
+                }
+            },
+            cartItemCountDecrease(count, bookName, id, index) {
+                if (count !== 1 || confirm("已是最后一本，点击确认将移除《" + bookName + "》")) {
+                    //需要减少
+                    axios({
+                        "method": "post",
+                        "url": "protected/cart",
+                        "params": {
+                            "method": "countDecrease",
+                            "id": id
+                        }
+                    }).then(response => {
+                        if (response.data.flag) {
+                            //减少成功
+                            if (--this.cart.cartItemList[index].count === 0) {
+                                this.cart.cartItemList.splice(index, 1);
+                            }
+                            //重新设置页面的totalCount和totalAmount
+                            this.cart.totalCount = response.data.resultData.totalCount;
+                            this.cart.totalAmount = response.data.resultData.totalAmount;
+                            this.cart.cartItemList[index].amount = response.data.resultData.bookAmount;
+                        }
+                    })
+                }
+            },
+            cartItemCountIncrease(count, bookName, id, index) {
+                axios({
+                    "method": "post",
+                    "url": "protected/cart",
+                    "params": {
+                        "method": "countIncrease",
+                        "id": id
+                    }
+                }).then(response => {
+                    if (response.data.flag) {
+                        //增加成功
+                        this.cart.cartItemList[index].count++;
+                        //重新设置页面的totalCount和totalAmount
+                        this.cart.totalCount = response.data.resultData.totalCount;
+                        this.cart.totalAmount = response.data.resultData.totalAmount;
+                        this.cart.cartItemList[index].amount = response.data.resultData.bookAmount;
+                    }
+                })
+            },
+            updateCartItemCount(index, newCount) {
+                let reg = /^[1-9][0-9]*$/;
+                if (reg.test(newCount)) {
+                    //发送携带请求参数
+                    axios({
+                        "method": "post",
+                        "url": "protected/cart",
+                        "params": {
+                            "method": "updateCartItemCount",
+                            "newCount": newCount,
+                            "id": this.cart.cartItemList[index].bookId
+                        }
+                    }).then(response => {
+                        if (response.data.flag) {
+                            //重新设置页面的totalCount和totalAmount
+                            this.cart.totalCount = response.data.resultData.totalCount;
+                            this.cart.totalAmount = response.data.resultData.totalAmount;
+                            this.cart.cartItemList[index].amount = response.data.resultData.bookAmount;
+                        }
+                    })
+                } else {
+                    alert("输入了错误的数字");
+                }
+            },
+            checkOutConfirm() {
+                if (!confirm("确认要提交订单吗？\n购物车将会被清空")) {
+                    event.preventDefault();
+                }
+            }
+        },
+        //钩子函数,在页面加载的时候发送异步请求,注意要写在methods外面
+        created() {
+            //发送异步请求
+            axios({
+                "method": "post",
+                "url": "protected/cart?method=getCartJSON"
+            }).then(response => {
+                if (response.data.flag) {
+                    this.cart = response.data.resultData;
+                } else {
+                    //查询购物车失败
+                    layer.msg(response.data.message);
+                }
+            })
+        }
+    });
+</script>
+<div class="bottom">
+    <div class="w">
+        <div class="top">
+            <ul>
+                <li>
+                    <a href="">
+                        <img src="static/img/bottom1.png" alt="">
+                        <span>太</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <img src="static/img/bottom.png" alt="">
+                        <span>肝</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <img src="static/img/bottom2.png" alt="">
+                        <span>啦</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="content">
+            <dl>
+                <dt>关于我们</dt>
+                <dd>理念</dd>
+                <!-- <dd>名师团队</dd>
+                <dd>学员心声</dd> -->
+            </dl>
+            <dl>
+                <dt>资源下载</dt>
+                <dd>视频下载</dd>
+                <!-- <dd>资料下载</dd>
+                <dd>工具下载</dd> -->
+            </dl>
+            <dl>
+                <dt>加入我们</dt>
+                <dd>招聘岗位</dd>
+                <!-- <dd>岗位介绍</dd>
+                <dd>招贤纳师</dd> -->
+            </dl>
+            <dl>
+                <dt>联系我们</dt>
+                <dd>88888</dd>
+            </dl>
+        </div>
+    </div>
+    <div class="down">
+        书城.Copyright ©2022
+    </div>
+</div>
+</body>
+</html>

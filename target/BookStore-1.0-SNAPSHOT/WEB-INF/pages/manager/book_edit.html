@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <base th:href="@{/}"/>
+    <link rel="stylesheet" href="static/css/minireset.css" />
+    <link rel="stylesheet" href="static/css/common.css" />
+    <link rel="stylesheet" href="static/css/style.css" />
+    <link rel="stylesheet" href="static/css/cart.css" />
+    <link rel="stylesheet" href="static/css/bookManger.css" />
+    <link rel="stylesheet" href="static/css/register.css" />
+    <link rel="stylesheet" href="static/css/book_edit.css" />
+  </head>
+  <body>
+    <div class="header">
+      <div class="w">
+        <div class="header-left">
+          <a href="index.html">
+            <img src="static/img/huaji1.png" alt="" width="258" height="82"/></a>
+          <h1>编辑图书</h1>
+        </div>
+        <div class="header-right" th:include="segment/admin-navigator :: navigator">
+
+        </div>
+      </div>
+    </div>
+    <div class="login_banner">
+      <div class="register_form">
+        <form action="bookManager?method=saveOrUpdateBook" method="post" th:if="${book != null}">
+          <div class="form-item">
+            <!--用隐藏域回显id-->
+            <input type="hidden" name="bookId" th:value="${book.bookId}">
+            <div>
+              <label>名称:</label>
+              <input type="text" th:value="${book.bookName}" placeholder="请输入名称" name="bookName"/>
+            </div>
+            <span class="errMess" style="visibility: hidden;">请输入正确的名称</span>
+          </div>
+          <div class="form-item">
+            <div>
+              <label>价格:</label>
+              <input type="number" th:value="${book.price}" placeholder="请输入价格" name="price"/>
+            </div>
+            <span class="errMess">请输入正确数字</span>
+          </div>
+          <div class="form-item">
+            <div>
+              <label>作者:</label>
+              <input type="text" th:value="${book.author}" placeholder="请输入作者" name="author"/>
+            </div>
+            <span class="errMess">请输入正确作者</span>
+          </div>
+          <div class="form-item">
+            <div>
+              <label>销量:</label>
+              <input type="number" th:value="${book.sales}" placeholder="请输入销量" name="sales"/>
+            </div>
+            <span class="errMess">请输入正确销量</span>
+          </div>
+          <div class="form-item">
+            <div>
+              <label>库存:</label>
+              <input type="number" th:value="${book.stock}" placeholder="请输入库存" name="stock"/>
+            </div>
+            <span class="errMess">请输入正确库存</span>
+          </div>
+
+          <button type="submit" class="btn">提交</button>
+        </form>
+        <form action="bookManager?method=saveOrUpdateBook" method="post" th:unless="${book != null}">
+          <div class="form-item">
+            <div>
+              <label>名称:</label>
+              <input type="text" placeholder="请输入名称" name="bookName"/>
+            </div>
+            <span class="errMess" style="visibility: hidden;">请输入正确的名称</span>
+          </div>
+          <div class="form-item">
+            <div>
+              <label>价格:</label>
+              <input type="number" placeholder="请输入价格" name="price"/>
+            </div>
+            <span class="errMess">请输入正确数字</span>
+          </div>
+          <div class="form-item">
+            <div>
+              <label>作者:</label>
+              <input type="text" placeholder="请输入作者" name="author"/>
+            </div>
+            <span class="errMess">请输入正确作者</span>
+          </div>
+          <div class="form-item">
+            <div>
+              <label>销量:</label>
+              <input type="number" placeholder="请输入销量" name="sales"/>
+            </div>
+            <span class="errMess">请输入正确销量</span>
+          </div>
+          <div class="form-item">
+            <div>
+              <label>库存:</label>
+              <input type="number" placeholder="请输入库存" name="stock"/>
+            </div>
+            <span class="errMess">请输入正确库存</span>
+          </div>
+
+          <button type="submit" class="btn">提交</button>
+        </form>
+      </div>
+    </div>
+    <div class="bottom">
+      书城.Copyright ©2022
+    </div>
+  </body>
+</html>

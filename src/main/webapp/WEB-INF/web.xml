@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+         version="4.0">
+    <filter>
+        <filter-name>LoginFilter</filter-name>
+        <filter-class>com.atguigu.filter.LoginFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>LoginFilter</filter-name>
+        <url-pattern>/protected/*</url-pattern>
+    </filter-mapping>
+
+
+    <filter>
+        <filter-name>CloseConnectionFilter</filter-name>
+        <filter-class>com.atguigu.filter.CloseConnectionFilter</filter-class>
+    </filter>
+    <filter-mapping><!--只对需要访问数据库的servlet采用这个filter-->
+        <filter-name>CloseConnectionFilter</filter-name>
+        <url-pattern>/bookManager</url-pattern>
+        <url-pattern>/protected/orderClient</url-pattern>
+        <url-pattern>/index.html</url-pattern>
+        <url-pattern>/user</url-pattern>
+    </filter-mapping>
+
+
+    <filter>
+        <filter-name>TransactionFilter</filter-name>
+        <filter-class>com.atguigu.filter.TransactionFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>TransactionFilter</filter-name>
+        <url-pattern>/protected/orderClient</url-pattern>
+    </filter-mapping>
+
+
+    <servlet>
+        <servlet-name>PortalServlet</servlet-name>
+        <servlet-class>com.atguigu.servlet.model.PortalServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UserServlet</servlet-name>
+        <servlet-class>com.atguigu.servlet.model.UserServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AdminServlet</servlet-name>
+        <servlet-class>com.atguigu.servlet.model.AdminServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>BookManagerServlet</servlet-name>
+        <servlet-class>com.atguigu.servlet.model.BookManagerServlet</servlet-class>
+    </servlet>
+    <!--配置kpatchaServlet的映射路径-->
+    <servlet>
+        <servlet-name>KaptchaServlet</servlet-name>
+        <servlet-class>com.google.code.kaptcha.servlet.KaptchaServlet</servlet-class>
+        <!--配置初始化参数-->
+        <init-param>
+            <!--固定写法-->
+            <param-name>kaptcha.session.key</param-name>
+            <!--这个值就是往session域对象中存储验证码时候的key-->
+            <param-value>checkCode</param-value>
+        </init-param>
+    </servlet>
+    <servlet>
+        <servlet-name>CartServlet</servlet-name>
+        <servlet-class>com.atguigu.servlet.model.CartServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>OrderClientServlet</servlet-name>
+        <servlet-class>com.atguigu.servlet.model.OrderClientServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>OrderManagerServlet</servlet-name>
+        <servlet-class>com.atguigu.servlet.model.OrderManagerServlet</servlet-class>
+    </servlet>
+
+
+    <servlet-mapping>
+        <servlet-name>OrderManagerServlet</servlet-name>
+        <url-pattern>/orderManager</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>OrderClientServlet</servlet-name>
+        <url-pattern>/protected/orderClient</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CartServlet</servlet-name>
+        <url-pattern>/protected/cart</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>KaptchaServlet</servlet-name>
+        <url-pattern>/kaptcha</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BookManagerServlet</servlet-name>
+        <url-pattern>/bookManager</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminServlet</servlet-name>
+        <url-pattern>/admin</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserServlet</servlet-name>
+        <url-pattern>/user</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PortalServlet</servlet-name>
+        <url-pattern>/index.html</url-pattern><!--设置成.html是为了当请求发送给html页面时，实际上是发送给这个servlet-->
+    </servlet-mapping>
+
+    <!--配置Thymeleaf前后缀-->
+    <context-param>
+        <param-name>view-prefix</param-name>
+        <param-value>/WEB-INF/pages/</param-value>
+    </context-param>
+    <context-param>
+        <param-name>view-suffix</param-name>
+        <param-value>.html</param-value>
+    </context-param>
+</web-app>

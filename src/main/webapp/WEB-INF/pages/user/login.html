@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>会员登录页面</title>
+    <base href="/bookstore/"/>
+    <link type="text/css" rel="stylesheet" href="static/css/style.css"/>
+    <script type="text/javascript" src="static/script/jquery.js"></script>
+    <script src="static/script/axios.js"></script>
+    <script src="static/script/vue.js"></script>
+    <script type="text/javascript" src="static/layer/layer.js"></script>
+</head>
+<body>
+<div id="app">
+    <div id="login_header">
+        <a href="index.html">
+            <img class="logo_img" alt="" src="static/img/huaji1.png" width="258" height="82"/>
+        </a>
+    </div>
+
+    <div class="login_banner">
+        <div id="l_content">
+            <span class="login_word">欢迎登录</span>
+        </div>
+
+        <div id="content">
+            <div class="login_form">
+                <div class="login_box">
+                    <div class="tit">
+                        <h1>会员</h1>
+                    </div>
+                    <div class="msg_cont">
+                        <b></b>
+                        <span class="errorMsg" style="color: red" v-bind="errorMessage">{{errorMessage}}</span>
+                    </div>
+                    <div class="form">
+                        <form action="user?method=doLogin" method="post"><!--设置了提交到的servlet -->
+                            <label>用户名称：</label>
+                            <input
+                                    class="itxt"
+                                    type="text"
+                                    placeholder="请输入用户名"
+                                    autocomplete="off"
+                                    tabindex="1"
+                                    name="username"
+                                    id="username"
+                                    v-model="username"
+                            />
+                            <br/>
+                            <br/>
+                            <label>用户密码：</label>
+                            <input
+                                    class="itxt"
+                                    type="password"
+                                    placeholder="请输入密码"
+                                    autocomplete="off"
+                                    tabindex="1"
+                                    name="password"
+                                    id="password"
+                                    v-model="password"
+                            />
+                            <br/>
+                            <br/>
+                            <input type="submit" value="登录" id="sub_btn" @click="doLogin()"/>
+                        </form>
+                        <div class="tit">
+                            <a href="user?method=toRegisterPage">立即注册</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="bottom">
+      <span>
+        书城.Copyright &copy;2021
+      </span>
+    </div>
+</div>
+<script>
+    var vue = new Vue({
+        "el": "#app",
+        "data": {
+            "username": "[[${param.username}]]",//拿到请求参数不直接渲染到视图上，而是赋给vue属性值，再由vue进行渲染
+            "password": "",
+            "errorMessage": ""
+        },
+        "methods": {
+            doLogin() {
+                //alert(this.username + ':' + this.password)
+                //判断用户名和密码是否为空
+                if (this.username != "" && this.username.length > 0) {
+                    if (!(this.password != "" && this.password.length > 0)) {
+                        //加入提示功能
+                        this.errorMessage = "密码不能为空"
+                        //就要阻止表单提交
+                        event.preventDefault()
+                    }
+                    /* else {
+                        axios({
+                            "method": "post",
+                            "url": "user",
+                            "params": {
+                                "method": "doLogin",
+                                "username": this.username,
+                                "password": this.password
+                            }
+                        }).then(resp => {
+                            if (!resp.data.flag) {
+                                this.errorMessage = resp.data.message
+                            }
+                        })
+                    }*/
+                } else {
+                    //加入提示功能
+                    this.errorMessage = "用户名不能为空"
+                    //就要阻止表单提交
+                    event.preventDefault()
+                }
+            }
+        }
+    });
+</script>
+</body>
+</html>

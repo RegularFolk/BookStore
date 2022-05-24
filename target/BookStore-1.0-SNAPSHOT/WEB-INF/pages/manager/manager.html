@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>后台管理</title>
+<base th:href="@{/}"/>
+<link type="text/css" rel="stylesheet" href="static/css/style.css" >
+<style type="text/css">
+	h1 {
+		text-align: center;
+		margin-top: 200px;
+	}
+</style>
+</head>
+<body>
+	
+	<div id="header">
+			<img class="logo_img" alt="" src="static/img/huaji1.png" width="258" height="82">
+			<span class="wel_word">后台管理系统</span>
+			<div th:include="segment/admin-navigator :: navigator">
+
+			</div>
+	</div>
+	
+	<div id="main">
+		<h1>欢迎管理员进入后台管理系统</h1>
+	</div>
+	
+	<div id="bottom">
+		<span>
+			书城.Copyright &copy;2022
+		</span>
+	</div>
+</body>
+</html>

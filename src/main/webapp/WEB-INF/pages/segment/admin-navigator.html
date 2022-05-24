@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>管理页面的公共头部</title>
+    <base th:href="@{/}">
+</head>
+<body>
+<div th:fragment="navigator">
+    <a href="bookManager?method=toBookManagerPage" class="order">图书管理 | </a>
+    <a href="orderManager?method=toOrderManagerPage" class="destroy">订单管理 | </a>
+    <a href="index.html" class="gohome">返回商城</a>
+</div>
+
+</body>
+</html>
