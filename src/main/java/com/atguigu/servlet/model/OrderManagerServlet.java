@@ -41,15 +41,4 @@ public class OrderManagerServlet extends ModelBaseServlet {
         }
     }
 
-    public void getOrdersByUserId(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        int id = Integer.parseInt(request.getParameter("id"));
-        List<Order> orderList;
-        try {
-            orderList = orderService.getOrdersByUserId(id);
-            request.setAttribute("orderList", orderList);
-            processTemplate("manager/order_manager", request, response);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 }

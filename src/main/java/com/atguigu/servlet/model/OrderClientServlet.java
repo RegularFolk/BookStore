@@ -1,6 +1,7 @@
 package com.atguigu.servlet.model;
 
 import com.atguigu.bean.Cart;
+import com.atguigu.bean.Order;
 import com.atguigu.bean.User;
 import com.atguigu.constant.Constants;
 import com.atguigu.service.OrderService;
@@ -10,7 +11,9 @@ import com.atguigu.servlet.base.ModelBaseServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 
 public class OrderClientServlet extends ModelBaseServlet {
     final private OrderService orderService = new OrderServiceImpl();
@@ -32,6 +35,21 @@ public class OrderClientServlet extends ModelBaseServlet {
             throw new RuntimeException(e.getMessage());
         }finally {
             processTemplate("cart/checkout", request, response);
+        }
+    }
+
+    /**
+     * 根据用户id查询对应订单
+     * */
+    public void getOrdersByUserId(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        List<Order> orderList;
+        try {
+            orderList = orderService.getOrdersByUserId(id);
+            request.setAttribute("orderList", orderList);
+            processTemplate("order/order", request, response);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }

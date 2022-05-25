@@ -55,46 +55,8 @@
 </div>
 <div class="bottom">
     <div class="w">
-        <div class="top">
-            <ul>
-                <li>
-                    <a href="">
-                        <img src="static/img/bottom1.png" alt="">
-                        <span>太</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="">
-                        <img src="static/img/bottom.png" alt="">
-                        <span>肝</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="">
-                        <img src="static/img/bottom2.png" alt="">
-                        <span>啦</span>
-                    </a>
-                </li>
-            </ul>
-        </div>
-        <div class="content">
-            <dl>
-                <dt>关于我们</dt>
-                <dd>理念</dd>
-            </dl>
-            <dl>
-                <dt>资源下载</dt>
-                <dd>视频下载</dd>
-            </dl>
-            <dl>
-                <dt>加入我们</dt>
-                <dd>招聘岗位</dd>
-            </dl>
-            <dl>
-                <dt>联系我们</dt>
-                <dd>88888</dd>
-            </dl>
-        </div>
+        <div class="top" th:include="segment/footer :: icon"></div>
+        <div class="content" th:include="segment/footer :: footer"></div>
     </div>
     <div class="down">
         书城.Copyright ©2022
