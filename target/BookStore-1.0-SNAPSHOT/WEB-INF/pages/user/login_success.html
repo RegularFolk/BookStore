@@ -23,22 +23,20 @@
     </a>
     <div>
         <span>欢迎<span class="um_span" th:text="${session.loginUser.username}">获取用户名失败</span>光临书城</span>
-        <a th:href="@{/orderManager(method='getOrdersByUserId',id=${session.loginUser.userId})}">我的订单</a>
+        <a th:href="@{/protected/orderClient(method='getOrdersByUserId',id=${session.loginUser.userId})}">我的订单</a>
         <a href="user?method=logout">注销</a>&nbsp;&nbsp;
         <a href="index.html">返回</a>
     </div>
 </div>
 
 <div id="main">
-
     <h1>欢迎回来 <a href="index.html">转到主页</a></h1>
-
 </div>
 
 <div id="bottom">
-			<span>
-				书城.Copyright &copy;2021
-			</span>
+    <span>
+        书城.Copyright &copy;2021
+    </span>
 </div>
 </body>
 </html>
