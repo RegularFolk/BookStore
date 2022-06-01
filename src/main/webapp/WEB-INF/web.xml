@@ -5,7 +5,7 @@
          version="4.0">
     <filter>
         <filter-name>LoginFilter</filter-name>
-        <filter-class>com.atguigu.filter.LoginFilter</filter-class>
+        <filter-class>com.filter.LoginFilter</filter-class>
     </filter>
     <filter-mapping>
         <filter-name>LoginFilter</filter-name>
@@ -15,7 +15,7 @@
 
     <filter>
         <filter-name>CloseConnectionFilter</filter-name>
-        <filter-class>com.atguigu.filter.CloseConnectionFilter</filter-class>
+        <filter-class>com.filter.CloseConnectionFilter</filter-class>
     </filter>
     <filter-mapping><!--只对需要访问数据库的servlet采用这个filter-->
         <filter-name>CloseConnectionFilter</filter-name>
@@ -28,7 +28,7 @@
 
     <filter>
         <filter-name>TransactionFilter</filter-name>
-        <filter-class>com.atguigu.filter.TransactionFilter</filter-class>
+        <filter-class>com.filter.TransactionFilter</filter-class>
     </filter>
     <filter-mapping>
         <filter-name>TransactionFilter</filter-name>
@@ -38,19 +38,19 @@
 
     <servlet>
         <servlet-name>PortalServlet</servlet-name>
-        <servlet-class>com.atguigu.servlet.model.PortalServlet</servlet-class>
+        <servlet-class>com.servlet.model.PortalServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>UserServlet</servlet-name>
-        <servlet-class>com.atguigu.servlet.model.UserServlet</servlet-class>
+        <servlet-class>com.servlet.model.UserServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>AdminServlet</servlet-name>
-        <servlet-class>com.atguigu.servlet.model.AdminServlet</servlet-class>
+        <servlet-class>com.servlet.model.AdminServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>BookManagerServlet</servlet-name>
-        <servlet-class>com.atguigu.servlet.model.BookManagerServlet</servlet-class>
+        <servlet-class>com.servlet.model.BookManagerServlet</servlet-class>
     </servlet>
     <!--配置kpatchaServlet的映射路径-->
     <servlet>
@@ -66,15 +66,15 @@
     </servlet>
     <servlet>
         <servlet-name>CartServlet</servlet-name>
-        <servlet-class>com.atguigu.servlet.model.CartServlet</servlet-class>
+        <servlet-class>com.servlet.model.CartServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>OrderClientServlet</servlet-name>
-        <servlet-class>com.atguigu.servlet.model.OrderClientServlet</servlet-class>
+        <servlet-class>com.servlet.model.OrderClientServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>OrderManagerServlet</servlet-name>
-        <servlet-class>com.atguigu.servlet.model.OrderManagerServlet</servlet-class>
+        <servlet-class>com.servlet.model.OrderManagerServlet</servlet-class>
     </servlet>
 
 

@@ -11,7 +11,8 @@
 .list .add a {
   width: 80px;
   height: 30px;
-  background-color: #39987c;
+  /*background-color: #39987c;*/
+  background-color: #803998;
   color: #fff;
   border: none;
   outline: none;
@@ -30,7 +31,8 @@
 }
 .list table td a {
   display: inline;
-  color: #39987c;
+  /*color: #39987c;*/
+  color: #803998;
 }
 .list table td .del {
   margin-left: 10px;
@@ -68,7 +70,8 @@
 }
 .list .footer-right ul li.active {
   font-weight: 700;
-  color: #39987c;
+  /*color: #39987c;*/
+  color: #803998;
   font-size: 24px;
 }
 .list .footer-right input {
@@ -80,7 +83,8 @@
   height: 30px;
   border: none;
   outline: none;
-  background-color: #39987c;
+  /*background-color: #39987c;*/
+  background-color: #803998;
   color: #fff;
   margin-left: 10px;
   cursor: pointer;

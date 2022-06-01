@@ -1,6 +1,7 @@
 .header {
   height: 100px;
-  border-bottom: 2px solid #39987c;
+  /*border-bottom: 2px solid #39987c;*/
+  border-bottom: 2px solid #423998;
 }
 .header .w {
   height: 100%;
@@ -39,12 +40,14 @@
 }
 .header .w .header-right div {
   font-size: 20px;
-  color: #39987c;
+  /*color: #39987c;*/
+  color: #423998;
   cursor: pointer;
 }
 .header .w .header-right div a {
   font-size: 20px;
-  color: #39987c;
+  /*color: #39987c;*/
+  color: #423998;
 }
 .header .w .header-right div:hover {
   color: skyblue;
@@ -122,7 +125,8 @@
   margin-left: 20px;
   display: flex;
   align-items: center;
-  color: #39987c;
+  /*color: #39987c;*/
+  color: #423998;
   font-size: 20px;
   cursor: pointer;
 }
@@ -130,7 +134,8 @@
   margin-right: 20px;
 }
 .list .w .footer-left a {
-  color: #39987c;
+  /*color: #39987c;*/
+  color: #423998;
 }
 .list .w .footer-left a:hover {
   color: skyblue;
@@ -154,7 +159,8 @@
 .list .w .footer-right .pay {
   height: 50px;
   line-height: 50px;
-  background-color: #39987c;
+  /*background-color: #39987c;*/
+  background-color: #423998;
   color: #fff;
   padding: 0 20px;
   margin-left: 20px;

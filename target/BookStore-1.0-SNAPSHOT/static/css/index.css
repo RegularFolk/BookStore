@@ -33,13 +33,15 @@
   color: #ff0000;
 }
 .topbar .topbar-right a:hover {
-  color: #39987c;
+  /*color: #39987c;*/
+  color: #423998;
 }
 .topbar .topbar-right .login,
 .topbar .topbar-right .register,
 .topbar .topbar-right .admin {
   font-size: 18px;
-  color: #39987c;
+  /*color: #39987c;*/
+  color: #423998;
 }
 .topbar .topbar-right .login:hover,
 .topbar .topbar-right .register:hover,
@@ -48,17 +50,20 @@
 }
 .topbar .topbar-right .login {
   font-size: 20px;
-  color: #39987c;
+  /*color: #39987c;*/
+  color: #423998;
 }
 .topbar .topbar-right .cart {
   padding: 0 10px;
-  background-color: #39987c;
+  /*background-color: #39987c;*/
+  background-color: #423998;
   color: #fff;
   font-size: 16px;
   position: relative;
 }
 .topbar .topbar-right .cart:hover {
-  color: #39987c;
+  /*color: #39987c;*/
+  color: #423998;
   background-color: #f00;
 }
 .topbar .topbar-right .cart-num {
@@ -95,7 +100,8 @@
   font-weight: 700;
 }
 .header-nav li a:hover {
-  color: #39987c;
+  /*color: #39987c;*/
+  color: #423998;
   text-shadow: 3px 2px 5px skyblue;
 }
 .header-search input {
@@ -130,13 +136,15 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  color: #39987c;
+  /*color: #39987c;*/
+  color: #423998;
 }
 .banner-left ul li a:hover {
   color: #fff;
 }
 .banner-left ul li:hover {
-  background-color: #39987c;
+  /*background-color: #39987c;*/
+  background-color: #423998;
 }
 .banner-right {
   width: 992px;
@@ -168,7 +176,8 @@
 }
 .books-list .list-header .price-search {
   font-size: 20px;
-  color: #39987c;
+  /*color: #39987c;*/
+  color: #423998;
   display: flex;
   align-items: center;
 }
@@ -181,7 +190,8 @@
   width: 60px;
   height: 30px;
   border: none;
-  background-color: #39987c;
+  /*background-color: #39987c;*/
+  background-color: #423998;
   outline: none;
   color: #fff;
   margin-left: 10px;
@@ -225,7 +235,8 @@
   width: 80px;
   height: 30px;
   border: none;
-  background-color: #39987c;
+  /*background-color: #39987c;*/
+  background-color: #423998;
   margin-top: 5px;
   outline: none;
   color: #fff;
@@ -261,7 +272,8 @@
 }
 .books-list .list-footer ul li.active {
   font-weight: 700;
-  color: #39987c;
+  /*color: #39987c;*/
+  color: #423998;
   font-size: 24px;
 }
 .books-list .list-footer input {
@@ -273,7 +285,8 @@
   height: 30px;
   border: none;
   outline: none;
-  background-color: #39987c;
+  /*background-color: #39987c;*/
+  background-color: #423998;
   color: #fff;
   margin-left: 10px;
   cursor: pointer;
@@ -287,7 +300,8 @@
 .cate .list {
   width: 234px;
   height: 170px;
-  background-color: #39987c;
+  /*background-color: #39987c;*/
+  background-color: #423998;
 }
 .cate .list-item {
   float: left;
@@ -339,7 +353,8 @@
 .books .seckill-header i {
   margin-right: 20px;
   font-size: 20px;
-  color: #39987c;
+  /*color: #39987c;*/
+  color: #423998;
   cursor: pointer;
 }
 .books .seckill-content {
@@ -370,7 +385,8 @@
 .books .seckill-content a .downcount .time {
   width: 42px;
   height: 42px;
-  background-color: #39987c;
+  /*background-color: #39987c;*/
+  background-color: #423998;
   text-align: center;
   line-height: 42px;
   color: #fff;
@@ -381,7 +397,8 @@
   height: 42px;
   line-height: 42px;
   margin: 0 10px;
-  color: #39987c;
+  /*color: #39987c;*/
+  color: #423998;
   font-size: 24px;
   font-weight: 500;
 }
@@ -414,7 +431,8 @@
   width: 80px;
   height: 30px;
   border: none;
-  background-color: #39987c;
+  /*background-color: #39987c;*/
+  background-color: #423998;
   margin-top: 10px;
   outline: none;
   color: #fff;
@@ -478,7 +496,8 @@
     height: 30px;
     border: none;
     line-height: 30px;
-    background-color: #39987c;
+    /*background-color: #39987c;*/
+    background-color: #423998;
     margin-top: 5px;
     outline: none;
     color: #fff;

@@ -133,7 +133,8 @@ div {
 
 .login_banner {
     height: 475px;
-    background-color: #39987c;
+    /*background-color: #39987c;*/
+    background-color: #423998;
 }
 
 .login_form {
@@ -202,7 +203,8 @@ h1 {
 }
 
 #sub_btn {
-    background-color: #39987c;
+    /*background-color: #39987c;*/
+    background-color: #423998;
     border: none;
     color: #fff;
     width: 360px;
@@ -227,7 +229,8 @@ h1 {
     /* margin-top: 5px; */
     font-size: 24px;
     margin-bottom: 10px;
-    color: #39987c;
+    /*color: #39987c;*/
+    color: #423998;
 }
 
 .tit a {
@@ -250,7 +253,8 @@ h1 {
 }
 
 .tit a {
-    color: #39987c;
+    /*color: #39987c;*/
+    color: #423998;
 }
 
 /*购物车*/
