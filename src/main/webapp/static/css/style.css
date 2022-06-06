@@ -35,6 +35,19 @@ div {
     width: 1200px;
     border: 1px black solid;
     overflow: auto;
+    /*background-image: url("../img/sakura.jpg");*/
+}
+
+#main h1{
+    color: #ff6700;
+}
+
+#login_success_body{
+    background-image: url("../img/csdn_page.jpg");
+}
+
+#manager_body{
+    background-image: url("../img/csdn_page.jpg");
 }
 
 #bottom {
@@ -95,6 +108,7 @@ div {
 .wel_word {
     font-size: 60px;
     float: left;
+    color: #ff6700;
 }
 
 .logo_img {
@@ -134,7 +148,8 @@ div {
 .login_banner {
     height: 475px;
     /*background-color: #39987c;*/
-    background-color: #423998;
+    /*background-color: #ff6700;*/
+    background-image: url("../img/csdn_page.jpg");
 }
 
 .login_form {
@@ -204,7 +219,7 @@ h1 {
 
 #sub_btn {
     /*background-color: #39987c;*/
-    background-color: #423998;
+    background-color: #ff6700;
     border: none;
     color: #fff;
     width: 360px;
@@ -215,6 +230,10 @@ h1 {
     float: left;
     margin-top: 150px;
     margin-left: 300px;
+}
+
+#l_content .login_word{
+    color: #ff6700;
 }
 
 #l_content span {
@@ -230,7 +249,7 @@ h1 {
     font-size: 24px;
     margin-bottom: 10px;
     /*color: #39987c;*/
-    color: #423998;
+    color: #ff6700;
 }
 
 .tit a {
@@ -254,7 +273,7 @@ h1 {
 
 .tit a {
     /*color: #39987c;*/
-    color: #423998;
+    color: #ff6700;
 }
 
 /*购物车*/
@@ -303,7 +322,7 @@ h1 {
 .cart_span a,
 td a {
     font-size: 20px;
-    color: blue;
+    color: #ff6700;
 }
 
 #header div span {
@@ -317,7 +336,7 @@ td a {
 }
 
 #header div a {
-    color: blue;
+    color: #ff6700;
 }
 
 #header .user {

@@ -32,7 +32,7 @@
         </div>
         <div class="header-right">
             <h3>欢迎<span th:text="${session.loginUser.username}"></span>光临书城</h3>
-            <div class="order"><a th:href="@{/orderManager(method='getOrdersByUserId',id=${session.loginUser.userId})}">我的订单</a></div>
+            <div class="order"><a th:href="@{/protected/orderClient(method='getOrdersByUserId',id=${session.loginUser.userId})}">我的订单</a></div>
             <div class="destory"><a href="index.html">注销</a></div>
             <div class="gohome">
                 <a href="index.html">返回</a>

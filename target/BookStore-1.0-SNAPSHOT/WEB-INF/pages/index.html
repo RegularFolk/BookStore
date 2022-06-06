@@ -66,8 +66,6 @@
             </ul>
         </div>
         <div class="header-search">
-            <!--<input type="text" placeholder="十万个为什么"/>
-            <button class="iconfont icon-search"></button>-->
         </div>
     </div>
     <div class="banner w clearfix">
@@ -146,15 +144,6 @@
         <div class="w">
             <div class="list">
                 <div class="list-header">
-                    <!--<div class="title">图书列表</div>
-                    <div class="price-search">
-                        <span>价格:</span>
-                        <input type="text">
-                        <span>-元</span>
-                        <input type="text">
-                        <span>元</span>
-                        <button>查询</button>
-                    </div>-->
                 </div>
                 <div class="list-content">
                     <div class="list-item" th:each="book : ${bookList}">
@@ -164,129 +153,14 @@
                         <p th:text="${book.price}">Unknown</p>
                         <p th:text="${book.sales}">Unknown</p>
                         <p th:text="${book.stock}">Unknown</p>
-                        <!--<a th:href="@{/protected/cart(method='addCartItem',id=${book.bookId})}">加入购物车</a>-->
                         <a href="javascript:;" @click="addCartItem">加入购物车</a>
                         <input th:value="${book.bookId}" type="hidden">
                     </div>
                 </div>
-                <!--<div class="list-footer">
-                    <div>首页</div>
-                    <div>上一页</div>
-                    <ul>
-                        <li class="active">1</li>
-                        <li>2</li>
-                        <li>3</li>
-                    </ul>
-                    <div>下一页</div>
-                    <div>末页</div>
-                    <span>共10页</span>
-                    <span>30条记录</span>
-                    <span>到第</span>
-                    <input type="text">
-                    <span>页</span>
-                    <button>确定</button>
-                </div>-->
             </div>
         </div>
 
     </div>
-    <!--<div class="cate w">
-        <div class="list">
-            <a href="" class="list-item">
-                <i class="iconfont icon-java"></i>
-                <span>java</span>
-            </a>
-            <a href="" class="list-item"
-            ><i class="iconfont icon-h5"></i>h5</a
-            >
-            <a href="" class="list-item">
-                <i class="iconfont icon-python"></i>python
-            </a>
-            <a href="" class="list-item"
-            ><i class="iconfont icon-tianchongxing-"></i>pm</a
-            >
-            <a href="" class="list-item"
-            ><i class="iconfont icon-php_elephant"></i>php</a
-            >
-            <a href="" class="list-item"
-            ><i class="iconfont icon-go"></i>go</a
-            >
-        </div>
-        <a href="" class="img">
-            <img src="static/uploads/cate4.jpg" alt=""/>
-        </a>
-        <a href="" class="img">
-            <img src="static/uploads/cate5.jpg" alt=""/>
-        </a>
-        <a href="" class="img">
-            <img src="static/uploads/cate6.jpg" alt=""/>
-        </a>
-    </div>
-    <div class="books">
-        <div class="w">
-            <div class="seckill">
-                <div class="seckill-header">
-                    <div class="title">
-                        图书秒杀
-                    </div>
-                    &lt;!&ndash; <i class="iconfont icon-huanyipi"></i> &ndash;&gt;
-                </div>
-                <div class="seckill-content">
-
-                    <a href="" class="tip">
-                        <h5>距离结束还有</h5>
-                        <i class="iconfont icon-shandian"></i>
-                        <div class="downcount">
-                            <span class="time">00</span>
-                            <span class="token">:</span>
-                            <span class="time">00</span>
-                            <span class="token">:</span>
-                            <span class="time">00</span>
-                        </div>
-                    </a>
-
-
-                    <a href="" class="books-sec">
-                        <img src="static/uploads/congwanqingdaominguo.jpg" alt="">
-                        <p>从晚晴到民国</p>
-                        <div>
-                            <span class="cur-price">￥28.9</span>
-                            <span class="pre-price">￥36.5</span>
-                        </div>
-                        <button>立即购买</button>
-                    </a>
-                    <a href="" class="books-sec">
-                        <img src="static/uploads/cyuyanrumenjingdian.jpg" alt="">
-                        <p>c语言入门经典</p>
-                        <div>
-                            <span class="cur-price">￥55.9</span>
-                            <span class="pre-price">￥68.5</span>
-                        </div>
-                        <button>立即购买</button>
-                    </a>
-                    <a href="" class="books-sec">
-                        <img src="static/uploads/fusang.jpg" alt="">
-                        <p>扶桑</p>
-                        <div>
-                            <span class="cur-price">￥30.9</span>
-                            <span class="pre-price">￥47.5</span>
-                        </div>
-                        <button>立即购买</button>
-                    </a>
-                    <a href="" class="books-sec">
-                        <img src="static/uploads/geihaizideshi.jpg" alt="">
-                        <p>给孩子的诗</p>
-                        <div>
-                            <span class="cur-price">￥18.9</span>
-                            <span class="pre-price">￥25.5</span>
-                        </div>
-                        <button>立即购买</button>
-                    </a>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>-->
     <div class="bottom">
         <div class="w">
             <div class="top" th:include="segment/footer :: icon"></div>

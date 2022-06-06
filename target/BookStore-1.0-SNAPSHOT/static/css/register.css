@@ -14,7 +14,7 @@
 }
 .login_banner .register_form h1 {
   /*color: #39987c;*/
-  color: #423998;
+  color: #ff6700;
   margin: 15px 0;
 }
 .login_banner .register_form form {
@@ -59,7 +59,7 @@
   width: 360px;
   height: 40px;
   /*background-color: #39987c;*/
-  background-color: #423998;
+  background-color: #ff6700;
   color: #fff;
   outline: none;
   border: none;

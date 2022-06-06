@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8"/>
     <title>会员登录页面</title>
-    <base href="/bookstore/"/>
+    <base th:href="@{/}" href="/bookstore/"/>
     <link type="text/css" rel="stylesheet" href="static/css/style.css"/>
     <script type="text/javascript" src="static/script/jquery.js"></script>
     <script src="static/script/axios.js"></script>
@@ -19,6 +19,7 @@
     </div>
 
     <div class="login_banner">
+
         <div id="l_content">
             <span class="login_word">欢迎登录</span>
         </div>
@@ -93,21 +94,6 @@
                         //就要阻止表单提交
                         event.preventDefault()
                     }
-                    /* else {
-                        axios({
-                            "method": "post",
-                            "url": "user",
-                            "params": {
-                                "method": "doLogin",
-                                "username": this.username,
-                                "password": this.password
-                            }
-                        }).then(resp => {
-                            if (!resp.data.flag) {
-                                this.errorMessage = resp.data.message
-                            }
-                        })
-                    }*/
                 } else {
                     //加入提示功能
                     this.errorMessage = "用户名不能为空"

@@ -1,7 +1,7 @@
 .header {
   height: 100px;
   /*border-bottom: 2px solid #39987c;*/
-  border-bottom: 2px solid #423998;
+  border-bottom: 2px solid #ff6700;
 }
 .header .w {
   height: 100%;
@@ -41,13 +41,13 @@
 .header .w .header-right div {
   font-size: 20px;
   /*color: #39987c;*/
-  color: #423998;
+  color: #ff6700;
   cursor: pointer;
 }
 .header .w .header-right div a {
   font-size: 20px;
   /*color: #39987c;*/
-  color: #423998;
+  color: #ff6700;
 }
 .header .w .header-right div:hover {
   color: skyblue;
@@ -126,7 +126,7 @@
   display: flex;
   align-items: center;
   /*color: #39987c;*/
-  color: #423998;
+  color: #ff6700;
   font-size: 20px;
   cursor: pointer;
 }
@@ -135,7 +135,7 @@
 }
 .list .w .footer-left a {
   /*color: #39987c;*/
-  color: #423998;
+  color: #ff6700;
 }
 .list .w .footer-left a:hover {
   color: skyblue;
@@ -160,7 +160,7 @@
   height: 50px;
   line-height: 50px;
   /*background-color: #39987c;*/
-  background-color: #423998;
+  background-color: #ff6700;
   color: #fff;
   padding: 0 20px;
   margin-left: 20px;

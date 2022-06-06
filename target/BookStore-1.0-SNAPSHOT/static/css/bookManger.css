@@ -1,7 +1,7 @@
 .header-right a {
   font-size: 20px;
   /*color: #39987c;*/
-  color: #423998;
+  color: #ff9990;
 }
 .list input {
   text-align: center;
@@ -13,7 +13,7 @@
   width: 80px;
   height: 30px;
   /*background-color: #39987c;*/
-  background-color: #803998;
+  background-color: #ff6700;
   color: #fff;
   border: none;
   outline: none;
@@ -33,7 +33,7 @@
 .list table td a {
   display: inline;
   /*color: #39987c;*/
-  color: #803998;
+  color: #ff6700;
 }
 .list table td .del {
   margin-left: 10px;
@@ -72,7 +72,7 @@
 .list .footer-right ul li.active {
   font-weight: 700;
   /*color: #39987c;*/
-  color: #803998;
+  color: #ff6700;
   font-size: 24px;
 }
 .list .footer-right input {
@@ -85,7 +85,7 @@
   border: none;
   outline: none;
   /*background-color: #39987c;*/
-  background-color: #803998;
+  background-color: #ff6700;
   color: #fff;
   margin-left: 10px;
   cursor: pointer;
